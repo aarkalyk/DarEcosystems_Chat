@@ -66,9 +66,7 @@ class ChatBubbleTextTableViewCell: UITableViewCell {
         self.contentView.addSubview(bubbleView)
         self.contentView.addSubview(contentLabel)
         self.contentView.addSubview(dateLabel)
-        for subView in contentView.subviews {
-            subView.translatesAutoresizingMaskIntoConstraints = false
-        }
+        contentView.constraintsImplementedProgrammatically()
     }
     
     //MARK: - Constraints

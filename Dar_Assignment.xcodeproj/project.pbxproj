@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		087974B11F23FD0A00C445BF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087974B01F23FD0A00C445BF /* UIViewExtension.swift */; };
 		08BD5C251F23A1D700AAC920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C241F23A1D700AAC920 /* AppDelegate.swift */; };
 		08BD5C2D1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C2B1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld */; };
 		08BD5C2F1F23A1D700AAC920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD5C2E1F23A1D700AAC920 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		08BD5C701F23A77800AAC920 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C6E1F23A77800AAC920 /* Message+CoreDataProperties.swift */; };
 		08BD5C721F23AA1400AAC920 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C711F23AA1400AAC920 /* NSDateExtension.swift */; };
 		08BD5C741F23C20C00AAC920 /* ChatBubbleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C731F23C20C00AAC920 /* ChatBubbleImageTableViewCell.swift */; };
-		08BD5C761F23C86300AAC920 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C751F23C86300AAC920 /* UIImageViewExtension.swift */; };
 		08BD5C781F23D05B00AAC920 /* ChatTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C771F23D05B00AAC920 /* ChatTextField.swift */; };
 		08BD5C7A1F23D57300AAC920 /* ChatViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C791F23D57300AAC920 /* ChatViewControllerExtension.swift */; };
 		08BD5C7C1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C7B1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift */; };
@@ -51,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		087974B01F23FD0A00C445BF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtension.swift; path = Extensions/UIViewExtension.swift; sourceTree = "<group>"; };
 		08BD5C211F23A1D700AAC920 /* Dar_Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dar_Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD5C241F23A1D700AAC920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08BD5C2C1F23A1D700AAC920 /* Dar_Assignment.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dar_Assignment.xcdatamodel; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		08BD5C6E1F23A77800AAC920 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Message+CoreDataProperties.swift"; path = "Dar_Assignment/Models/Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		08BD5C711F23AA1400AAC920 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = Extensions/NSDateExtension.swift; sourceTree = "<group>"; };
 		08BD5C731F23C20C00AAC920 /* ChatBubbleImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatBubbleImageTableViewCell.swift; path = Views/ChatBubbleImageTableViewCell.swift; sourceTree = "<group>"; };
-		08BD5C751F23C86300AAC920 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageViewExtension.swift; path = Extensions/UIImageViewExtension.swift; sourceTree = "<group>"; };
 		08BD5C771F23D05B00AAC920 /* ChatTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTextField.swift; path = Views/ChatTextField.swift; sourceTree = "<group>"; };
 		08BD5C791F23D57300AAC920 /* ChatViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewControllerExtension.swift; path = Controllers/ChatViewControllerExtension.swift; sourceTree = "<group>"; };
 		08BD5C7B1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatBubbleTextTableViewCell.swift; path = Views/ChatBubbleTextTableViewCell.swift; sourceTree = "<group>"; };
@@ -150,10 +150,10 @@
 				08BD5C6B1F23A4EE00AAC920 /* Hints.swift */,
 				08BD5C711F23AA1400AAC920 /* NSDateExtension.swift */,
 				08BD5C731F23C20C00AAC920 /* ChatBubbleImageTableViewCell.swift */,
-				08BD5C751F23C86300AAC920 /* UIImageViewExtension.swift */,
 				08BD5C771F23D05B00AAC920 /* ChatTextField.swift */,
 				08BD5C791F23D57300AAC920 /* ChatViewControllerExtension.swift */,
 				08BD5C7B1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift */,
+				087974B01F23FD0A00C445BF /* UIViewExtension.swift */,
 			);
 			path = Dar_Assignment;
 			sourceTree = "<group>";
@@ -317,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				087974B11F23FD0A00C445BF /* UIViewExtension.swift in Sources */,
 				08BD5C7C1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift in Sources */,
 				08BD5C721F23AA1400AAC920 /* NSDateExtension.swift in Sources */,
 				08BD5C701F23A77800AAC920 /* Message+CoreDataProperties.swift in Sources */,
@@ -330,7 +331,6 @@
 				08BD5C2D1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld in Sources */,
 				08BD5C7A1F23D57300AAC920 /* ChatViewControllerExtension.swift in Sources */,
 				08BD5C6F1F23A77800AAC920 /* Message+CoreDataClass.swift in Sources */,
-				08BD5C761F23C86300AAC920 /* UIImageViewExtension.swift in Sources */,
 				08BD5C741F23C20C00AAC920 /* ChatBubbleImageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -574,6 +574,7 @@
 				08BD5C4E1F23A1D700AAC920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08BD5C4F1F23A1D700AAC920 /* Build configuration list for PBXNativeTarget "Dar_AssignmentTests" */ = {
 			isa = XCConfigurationList;
@@ -582,6 +583,7 @@
 				08BD5C511F23A1D700AAC920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08BD5C521F23A1D700AAC920 /* Build configuration list for PBXNativeTarget "Dar_AssignmentUITests" */ = {
 			isa = XCConfigurationList;
@@ -590,6 +592,7 @@
 				08BD5C541F23A1D700AAC920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

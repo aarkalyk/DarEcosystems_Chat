@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatInputViewDelegate {
+protocol ChatInputViewDelegate : AnyObject {
     func didHitSendButtonWith(text : String)
     func didHitAttachButton()
 }
@@ -16,7 +16,7 @@ protocol ChatInputViewDelegate {
 class ChatInputView: UIView {
     
     //MARK: - Properties
-    var delegate : ChatInputViewDelegate?
+    weak var delegate : ChatInputViewDelegate?
     
     lazy var attachButton : UIButton = {
         let button = UIButton()
@@ -39,8 +39,9 @@ class ChatInputView: UIView {
         let textField = ChatTextField()
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 5.0
+        textField.delegate = self
         textField.clipsToBounds = true
-        textField.placeholder = "Type your message here..."
+        textField.placeholder = Hints.textFieldPlaceHolder
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
@@ -65,9 +66,7 @@ class ChatInputView: UIView {
         self.addSubview(attachButton)
         self.addSubview(textField)
         self.addSubview(sendButton)
-        for subView in self.subviews {
-            subView.translatesAutoresizingMaskIntoConstraints = false
-        }
+        self.constraintsImplementedProgrammatically()
     }
     
     //MARK: - Selector actions
@@ -76,6 +75,7 @@ class ChatInputView: UIView {
             return
         }
         delegate.didHitSendButtonWith(text: textField.text!)
+        sendButton.isEnabled = false
         textField.text = ""
     }
     
@@ -84,14 +84,6 @@ class ChatInputView: UIView {
             return
         }
         delegate.didHitAttachButton()
-    }
-    
-    func textFieldDidChange(_ textField : UITextField){
-        if textField.text == "" {
-            sendButton.isEnabled = false
-        }else{
-            sendButton.isEnabled = true
-        }
     }
     
     //MARK: - Constraints
@@ -189,6 +181,17 @@ class ChatInputView: UIView {
                                      attachButtonTop, attachButtonBottom, attachButtonLeading, attachButtonTrailing,
                                      sendButtonTop, sendButtonBottom, sendButtonLeading, sendButtonTrailing])
         
+    }
+}
+
+//MARK: - UITextField
+extension ChatInputView: UITextFieldDelegate{
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        sendButton.isEnabled = textField.text == "" ? false : true
+    }
+    
+    func textFieldDidChange(_ textField : UITextField){
+        sendButton.isEnabled = textField.text == "" ? false : true
     }
 }
 

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Please, allow the app to access your camera so that you can take photos and send them to your friends</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please, allow the app to access your photos so that you can send them to your friends</string>
 	<key>CFBundleDevelopmentRegion</key>

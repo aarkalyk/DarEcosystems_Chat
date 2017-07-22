@@ -66,9 +66,7 @@ class ChatBubbleImageTableViewCell: UITableViewCell {
         contentView.addSubview(bubbleView)
         contentView.addSubview(messageImageView)
         contentView.addSubview(dateLabel)
-        for subView in contentView.subviews {
-            subView.translatesAutoresizingMaskIntoConstraints = false
-        }
+        contentView.constraintsImplementedProgrammatically()
     }
     
     //MARK: - Constraints

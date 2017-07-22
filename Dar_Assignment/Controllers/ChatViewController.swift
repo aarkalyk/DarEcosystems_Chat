@@ -18,11 +18,11 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
         tableView.clipsToBounds = true
         tableView.separatorColor = .clear
         tableView.backgroundColor = .clear
-        tableView.contentInset = Hints.tableViewRegularInsets
+        tableView.contentInset = Constants.tableViewRegularInsets
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
-        tableView.register(ChatBubbleImageTableViewCell.self, forCellReuseIdentifier: Hints.imageTableViewCellIdentifier)
-        tableView.register(ChatBubbleTextTableViewCell.self, forCellReuseIdentifier: Hints.textTableViewCellIdentifier)
+        tableView.register(ChatBubbleImageTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.imageTableViewCellIdentifier)
+        tableView.register(ChatBubbleTextTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.textTableViewCellIdentifier)
         return tableView
     }()
     
@@ -69,14 +69,45 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
         view.backgroundColor = .white
         view.addSubview(tableView)
         view.addSubview(chatInputView)
-        for subView in view.subviews {
-            subView.translatesAutoresizingMaskIntoConstraints = false
-        }
+        view.constraintsImplementedProgrammatically()
     }
     
     func setupNotifications(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    //MARK: - CoreData
+    func getData(){
+        do{
+            messages = try context.fetch(Message.fetchRequest())
+        }catch{
+            print("error when fetching data")
+        }
+        saveMessagesInDictionary()
+    }
+    
+    func saveMessagesInDictionary(){
+        for message in messages {
+            addMessageToDictionary(message: message)
+        }
+        tableView.reloadData()
+        scrollToLatestMessage()
+    }
+    
+    func addMessageToDictionary(message : Message){
+        let dateString = NSDate.dateStringFrom(date: message.createdAt!)
+        if messageDateDictionary[dateString] == nil {
+            messageDateDictionary[dateString] = []
+        }
+        messageDateDictionary[dateString]?.append(message)
+        if !days.contains(dateString) {
+            days.append(dateString)
+        }
+    }
+    
+    func saveContext(){
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     //MARK: - Constraints

@@ -41,11 +41,11 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
         let message = messageDateDictionary[day]?[indexPath.row]
         
         if (message?.imageData) != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Hints.imageTableViewCellIdentifier, for: indexPath) as! ChatBubbleImageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.imageTableViewCellIdentifier, for: indexPath) as! ChatBubbleImageTableViewCell
             cell.message = message
             return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: Hints.textTableViewCellIdentifier, for: indexPath) as! ChatBubbleTextTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.textTableViewCellIdentifier, for: indexPath) as! ChatBubbleTextTableViewCell
             cell.message = message
             return cell
         }
@@ -63,14 +63,22 @@ extension ChatViewController: ChatInputViewDelegate{
     }
     
     func didHitAttachButton() {
-        showImagePickerController()
+        showImagePickerAlertView()
     }
 }
 
 //MARK: - UIImagePickerController
 extension ChatViewController: UIImagePickerControllerDelegate{
-    func showImagePickerController(){
+    func openImageLibrary(){
+        imagePicker.sourceType = .savedPhotosAlbum
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func openCamera(){
+        imagePicker.sourceType = .camera
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             self.present(imagePicker, animated: true, completion: nil)
         }
     }
@@ -79,7 +87,6 @@ extension ChatViewController: UIImagePickerControllerDelegate{
         let image = info[Hints.imageDataKey] as! UIImage
         if let data = UIImagePNGRepresentation(image) as NSData?{
             let message = Message(text: nil, imageData: data, context: context)
-            print("\n\n message \(message) \n\n")
             addMessageToDictionary(message: message)
             tableView.reloadData()
             scrollToLatestMessage()
@@ -87,42 +94,29 @@ extension ChatViewController: UIImagePickerControllerDelegate{
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    func showImagePickerAlertView(){
+        let alertController = UIAlertController(title: Hints.imagePickerDialogString, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let DestructiveAction = UIAlertAction(title: Hints.cancelString, style: UIAlertActionStyle.destructive) { (result: UIAlertAction) in
+            print("Canceled")
+        }
+        let cameraAction = UIAlertAction(title: Hints.cameraString, style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            self.openCamera()
+        }
+        let photoLibraryAction = UIAlertAction(title: Hints.imageLibraryString, style: UIAlertActionStyle.default) {
+            (result : UIAlertAction) -> Void in
+            self.openImageLibrary()
+        }
+        
+        alertController.addAction(cameraAction)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(DestructiveAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension ChatViewController{
-    //MARK: - CoreData
-    func getData(){
-        do{
-            messages = try context.fetch(Message.fetchRequest())
-        }catch{
-            print("error when fetching data")
-        }
-        saveMessagesInDictionary()
-    }
-    
-    func saveMessagesInDictionary(){
-        for message in messages {
-            addMessageToDictionary(message: message)
-        }
-        tableView.reloadData()
-        scrollToLatestMessage()
-    }
-    
-    func addMessageToDictionary(message : Message){
-        let dateString = NSDate.dateStringFrom(date: message.createdAt!)
-        if messageDateDictionary[dateString] == nil {
-            messageDateDictionary[dateString] = []
-        }
-        messageDateDictionary[dateString]?.append(message)
-        if !days.contains(dateString) {
-            days.append(dateString)
-        }
-    }
-    
-    func saveContext(){
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    }
-    
     //MARK: - Notification actions
     func keyBoardWillShow(notification: Notification){
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
@@ -150,7 +144,7 @@ extension ChatViewController{
     }
     
     func moveInpuViewDownwards(byValue : CGFloat){
-        tableView.contentInset = Hints.tableViewRegularInsets
+        tableView.contentInset = Constants.tableViewRegularInsets
         scrollToLatestMessage()
         UIView.animate(withDuration: 0.3) {
             self.chatInputView.frame.origin.y += byValue

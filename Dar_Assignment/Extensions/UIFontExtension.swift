@@ -11,14 +11,14 @@ import UIKit
 
 extension UIFont{
     static func helveticaNeueRegular(size : CGFloat) -> UIFont{
-        guard let font = UIFont(name: "HelveticaNeue", size: size) else {
+        guard let font = UIFont(name: FontNames.helveticaNeue, size: size) else {
             return UIFont()
         }
         return font
     }
     
     static func helveticaNeueLight(size : CGFloat) -> UIFont{
-        guard let font = UIFont(name: "HelveticaNeue-Light", size: size) else {
+        guard let font = UIFont(name: FontNames.helveticaNeueLight, size: size) else {
             return UIFont()
         }
         return font
