@@ -50,20 +50,30 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
             return cell
         }
     }
+    
+    func sendNewMessage(message : Message){
+        addMessageToDictionary(message: message)
+        let section = days.count - 1
+        guard let sectionMessages = messageDateDictionary[days[section]] else {
+            return
+        }
+        let row = sectionMessages.count - 1
+        let indexPath = IndexPath(row: row, section: section)
+        tableView.insertRows(at: [indexPath], with: .fade)
+        dismissKeyboard()
+        saveContext()
+    }
 }
 
 //MARK: - ChatInputView delegate
 extension ChatViewController: ChatInputViewDelegate{
     func didHitSendButtonWith(text: String) {
         let message = Message(text: text, imageData: nil, context: context)
-        addMessageToDictionary(message: message)
-        tableView.reloadData()
-        dismissKeyboard()
-        saveContext()
+        sendNewMessage(message: message)
     }
     
     func didHitAttachButton() {
-        showImagePickerAlertView()
+        showImagePickerAlert()
     }
 }
 
@@ -87,15 +97,12 @@ extension ChatViewController: UIImagePickerControllerDelegate{
         let image = info[Hints.imageDataKey] as! UIImage
         if let data = UIImagePNGRepresentation(image) as NSData?{
             let message = Message(text: nil, imageData: data, context: context)
-            addMessageToDictionary(message: message)
-            tableView.reloadData()
-            scrollToLatestMessage()
-            saveContext()
+            sendNewMessage(message: message)
         }
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func showImagePickerAlertView(){
+    func showImagePickerAlert(){
         let alertController = UIAlertController(title: Hints.imagePickerDialogString, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         let DestructiveAction = UIAlertAction(title: Hints.cancelString, style: UIAlertActionStyle.destructive) { (result: UIAlertAction) in
             print("Canceled")
