@@ -104,10 +104,10 @@ class ChatBubbleImageTableViewCell: UITableViewCell {
         let imageHeight = NSLayoutConstraint(item: messageImageView,
                                              attribute: .height,
                                              relatedBy: .lessThanOrEqual,
-                                             toItem: nil,
-                                             attribute: .notAnAttribute,
+                                             toItem: messageImageView,
+                                             attribute: .width,
                                              multiplier: 1.0,
-                                             constant: 140)
+                                             constant: 0)
         //DateLabel constraints
         let dateTop = NSLayoutConstraint(item: dateLabel,
                                          attribute: .top,
