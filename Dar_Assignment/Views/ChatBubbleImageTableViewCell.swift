@@ -101,6 +101,13 @@ class ChatBubbleImageTableViewCell: UITableViewCell {
                                           attribute: .trailingMargin,
                                           multiplier: 1.0,
                                           constant: -8)
+        let imageHeight = NSLayoutConstraint(item: messageImageView,
+                                             attribute: .height,
+                                             relatedBy: .lessThanOrEqual,
+                                             toItem: nil,
+                                             attribute: .notAnAttribute,
+                                             multiplier: 1.0,
+                                             constant: 140)
         //DateLabel constraints
         let dateTop = NSLayoutConstraint(item: dateLabel,
                                          attribute: .top,
@@ -160,7 +167,7 @@ class ChatBubbleImageTableViewCell: UITableViewCell {
                                            multiplier: 1.0,
                                            constant: 10)
         
-        NSLayoutConstraint.activate([imageTop, imageBottom, imageLeading, imageTrailing,
+        NSLayoutConstraint.activate([imageTop, imageBottom, imageLeading, imageTrailing, imageHeight,
                                      dateTop, dateBottom, dateLeading, dateTrailing,
                                      bubbleTop, bubbleBottom, bubbleLeading, bubbleTrailing])
     }
