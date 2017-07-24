@@ -38,9 +38,7 @@ class ChatInputView: UIView {
     lazy var textField : ChatTextField = {
         let textField = ChatTextField()
         textField.backgroundColor = .white
-        textField.layer.cornerRadius = 5.0
         textField.delegate = self
-        textField.clipsToBounds = true
         textField.placeholder = Hints.textFieldPlaceHolder
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField

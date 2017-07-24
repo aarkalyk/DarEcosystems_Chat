@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		084A81511F24800A00339435 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A81501F24800A00339435 /* ImageViewController.swift */; };
 		087974B11F23FD0A00C445BF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087974B01F23FD0A00C445BF /* UIViewExtension.swift */; };
 		08BD5C251F23A1D700AAC920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C241F23A1D700AAC920 /* AppDelegate.swift */; };
 		08BD5C2D1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C2B1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		084A81501F24800A00339435 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewController.swift; path = Controllers/ImageViewController.swift; sourceTree = "<group>"; };
 		087974B01F23FD0A00C445BF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtension.swift; path = Extensions/UIViewExtension.swift; sourceTree = "<group>"; };
 		08BD5C211F23A1D700AAC920 /* Dar_Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dar_Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD5C241F23A1D700AAC920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				08BD5C791F23D57300AAC920 /* ChatViewControllerExtension.swift */,
 				08BD5C7B1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift */,
 				087974B01F23FD0A00C445BF /* UIViewExtension.swift */,
+				084A81501F24800A00339435 /* ImageViewController.swift */,
 			);
 			path = Dar_Assignment;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				08BD5C701F23A77800AAC920 /* Message+CoreDataProperties.swift in Sources */,
 				08BD5C641F23A43100AAC920 /* UIColorExtension.swift in Sources */,
 				08BD5C661F23A45E00AAC920 /* UIFontExtension.swift in Sources */,
+				084A81511F24800A00339435 /* ImageViewController.swift in Sources */,
 				08BD5C6C1F23A4EE00AAC920 /* Hints.swift in Sources */,
 				08BD5C5E1F23A3BB00AAC920 /* ChatInputView.swift in Sources */,
 				08BD5C781F23D05B00AAC920 /* ChatTextField.swift in Sources */,
