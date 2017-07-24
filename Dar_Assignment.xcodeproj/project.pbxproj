@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		084A81511F24800A00339435 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084A81501F24800A00339435 /* ImageViewController.swift */; };
 		087974B11F23FD0A00C445BF /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087974B01F23FD0A00C445BF /* UIViewExtension.swift */; };
+		08832AF11F25E49B00BC9C83 /* ImageSourceAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08832AF01F25E49B00BC9C83 /* ImageSourceAlertController.swift */; };
 		08BD5C251F23A1D700AAC920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C241F23A1D700AAC920 /* AppDelegate.swift */; };
 		08BD5C2D1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08BD5C2B1F23A1D700AAC920 /* Dar_Assignment.xcdatamodeld */; };
 		08BD5C2F1F23A1D700AAC920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD5C2E1F23A1D700AAC920 /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		084A81501F24800A00339435 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewController.swift; path = Controllers/ImageViewController.swift; sourceTree = "<group>"; };
 		087974B01F23FD0A00C445BF /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtension.swift; path = Extensions/UIViewExtension.swift; sourceTree = "<group>"; };
+		08832AF01F25E49B00BC9C83 /* ImageSourceAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSourceAlertController.swift; path = Controllers/ImageSourceAlertController.swift; sourceTree = "<group>"; };
 		08BD5C211F23A1D700AAC920 /* Dar_Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dar_Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08BD5C241F23A1D700AAC920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08BD5C2C1F23A1D700AAC920 /* Dar_Assignment.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dar_Assignment.xcdatamodel; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				08BD5C7B1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift */,
 				087974B01F23FD0A00C445BF /* UIViewExtension.swift */,
 				084A81501F24800A00339435 /* ImageViewController.swift */,
+				08832AF01F25E49B00BC9C83 /* ImageSourceAlertController.swift */,
 			);
 			path = Dar_Assignment;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08832AF11F25E49B00BC9C83 /* ImageSourceAlertController.swift in Sources */,
 				087974B11F23FD0A00C445BF /* UIViewExtension.swift in Sources */,
 				08BD5C7C1F23E20F00AAC920 /* ChatBubbleTextTableViewCell.swift in Sources */,
 				08BD5C721F23AA1400AAC920 /* NSDateExtension.swift in Sources */,

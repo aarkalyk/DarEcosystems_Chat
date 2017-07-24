@@ -30,5 +30,6 @@ enum CellIdentifiers {
 }
 
 enum Constants {
+    static let closeButtonSize = CGSize(width: 44, height: 44)
     static let tableViewRegularInsets = UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 0)
 }

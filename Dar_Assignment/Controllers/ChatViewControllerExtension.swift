@@ -37,10 +37,8 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let day = days[indexPath.section]
-        let message = messageDateDictionary[day]?[indexPath.row]
-        
-        if (message?.imageData) != nil {
+        let message = messageAt(indexPath: indexPath)
+        if (message.imageData) != nil {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.imageTableViewCellIdentifier, for: indexPath) as! ChatBubbleImageTableViewCell
             cell.message = message
             return cell
@@ -51,17 +49,17 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func sendNewMessage(message : Message){
-        addMessageToDictionary(message: message)
-        let section = days.count - 1
-        guard let sectionMessages = messageDateDictionary[days[section]] else {
-            return
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messageAt(indexPath: indexPath)
+        if (message.imageData) != nil {
+            let vc = ImageViewController()
+            vc.message = message
+            //self.present(vc, animated: true, completion: nil)
         }
-        let row = sectionMessages.count - 1
-        let indexPath = IndexPath(row: row, section: section)
-        tableView.insertRows(at: [indexPath], with: .fade)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         dismissKeyboard()
-        saveContext()
     }
 }
 
@@ -79,20 +77,6 @@ extension ChatViewController: ChatInputViewDelegate{
 
 //MARK: - UIImagePickerController
 extension ChatViewController: UIImagePickerControllerDelegate{
-    func openImageLibrary(){
-        imagePicker.sourceType = .savedPhotosAlbum
-        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
-    
-    func openCamera(){
-        imagePicker.sourceType = .camera
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-    }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[Hints.imageDataKey] as! UIImage
         if let data = UIImagePNGRepresentation(image) as NSData?{
@@ -103,23 +87,23 @@ extension ChatViewController: UIImagePickerControllerDelegate{
     }
     
     func showImagePickerAlert(){
-        let alertController = UIAlertController(title: Hints.imagePickerDialogString, message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        let DestructiveAction = UIAlertAction(title: Hints.cancelString, style: UIAlertActionStyle.destructive) { (result: UIAlertAction) in
-            print("Canceled")
+        self.present(imageSourceAlertController, animated: true, completion: nil)
+    }
+}
+
+extension ChatViewController: ImageSourceAlertControllerDelegate{
+    func cameraSourceSelected() {
+        imagePicker.sourceType = .camera
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            self.present(imagePicker, animated: true, completion: nil)
         }
-        let cameraAction = UIAlertAction(title: Hints.cameraString, style: UIAlertActionStyle.default) {
-            (result : UIAlertAction) -> Void in
-            self.openCamera()
+    }
+    
+    func imageLibrarySourceSelected() {
+        imagePicker.sourceType = .savedPhotosAlbum
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            self.present(imagePicker, animated: true, completion: nil)
         }
-        let photoLibraryAction = UIAlertAction(title: Hints.imageLibraryString, style: UIAlertActionStyle.default) {
-            (result : UIAlertAction) -> Void in
-            self.openImageLibrary()
-        }
-        
-        alertController.addAction(cameraAction)
-        alertController.addAction(photoLibraryAction)
-        alertController.addAction(DestructiveAction)
-        self.present(alertController, animated: true, completion: nil)
     }
 }
 
@@ -143,7 +127,9 @@ extension ChatViewController{
     
     //MARK: - Helper methods
     func moveInpuViewUpwards(byValue : CGFloat){
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: byValue+15, right: 0)
+        var newInsets = Constants.tableViewRegularInsets
+        newInsets.bottom += byValue+15
+        tableView.contentInset = newInsets
         scrollToLatestMessage()
         UIView.animate(withDuration: 0.3) {
             self.chatInputView.frame.origin.y -= byValue
@@ -152,10 +138,8 @@ extension ChatViewController{
     
     func moveInpuViewDownwards(byValue : CGFloat){
         tableView.contentInset = Constants.tableViewRegularInsets
-        scrollToLatestMessage()
         UIView.animate(withDuration: 0.3) {
             self.chatInputView.frame.origin.y += byValue
-            self.updateViewConstraints()
         }
     }
     
@@ -169,14 +153,23 @@ extension ChatViewController{
         }
         let row = todaysMessages.count - 1
         let indexPath = IndexPath(row: row, section: days.count-1)
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
     }
     
-    //MARK: - Selector actions
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        tableView.addGestureRecognizer(tap)
+    func sendNewMessage(message : Message){
+        addMessageToDictionary(message: message)
+        tableView.reloadData()
+        dismissKeyboard()
+        DispatchQueue.main.async {
+            self.scrollToLatestMessage()
+        }
+        saveContext()
+    }
+    
+    func messageAt(indexPath : IndexPath) -> Message{
+        let day = days[indexPath.section]
+        let message = messageDateDictionary[day]?[indexPath.row]
+        return message!
     }
     
     func dismissKeyboard() {

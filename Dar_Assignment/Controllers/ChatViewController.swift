@@ -45,6 +45,12 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
         return imagePicker
     }()
     
+    lazy var imageSourceAlertController : ImageSourceAlertController = {
+        let alert = ImageSourceAlertController()
+        alert.delegate = self
+        return alert
+    }()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +66,6 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
     //MARK: - Initial setup
     func setup(){
         self.title = Hints.chatViewControllerTitle
-        hideKeyboardWhenTappedAround()
         setupSubviews()
         setupNotifications()
     }
@@ -124,10 +129,10 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
         let tableViewBottom = NSLayoutConstraint(item: tableView,
                                                  attribute: .bottom,
                                                  relatedBy: .equal,
-                                                 toItem: self.view,
-                                                 attribute: .bottom,
+                                                 toItem: chatInputView,
+                                                 attribute: .top,
                                                  multiplier: 1.0,
-                                                 constant: -44)
+                                                 constant: 0)
         let tableViewLeading = NSLayoutConstraint(item: tableView,
                                                   attribute: .leading,
                                                   relatedBy: .equal,
@@ -171,8 +176,15 @@ class ChatViewController: UIViewController, UINavigationControllerDelegate {
                                                    attribute: .trailing,
                                                    multiplier: 1.0,
                                                    constant: 0)
+        let inputViewHeight = NSLayoutConstraint(item: chatInputView,
+                                                 attribute: .height,
+                                                 relatedBy: .equal,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1.0,
+                                                 constant: 44)
         
         NSLayoutConstraint.activate([tableViewTop, tableViewBottom, tableViewLeading, tableViewTrailing,
-                                     inputViewTop, inputViewBottom, inputViewLeading, inputViewTrailing])
+                                     inputViewTop, inputViewBottom, inputViewLeading, inputViewTrailing, inputViewHeight])
     }
 }
